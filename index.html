@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2f57">
+  <title>TaskFlow — Stay Productive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="TaskFlow home">
+        <span class="brand-mark">✦</span><span>Task<span class="gold-text">Flow</span></span>
+      </a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Task filters">
+        <button class="nav-item active" data-filter="all"><span class="nav-icon">▦</span> All Tasks <span class="nav-count" id="sideAll">0</span></button>
+        <button class="nav-item" data-filter="active"><span class="nav-icon">◷</span> In Progress <span class="nav-count" id="sideActive">0</span></button>
+        <button class="nav-item" data-filter="completed"><span class="nav-icon">✓</span> Completed <span class="nav-count" id="sideCompleted">0</span></button>
+      </nav>
+      <div class="side-divider"></div>
+      <div class="side-label">TOOLS</div>
+      <button class="nav-item search-shortcut" id="focusSearch"><span class="nav-icon">⌕</span> Search tasks</button>
+      <div class="sidebar-art" aria-hidden="true">
+        <div class="art-sun"></div><div class="art-hill hill-one"></div><div class="art-hill hill-two"></div>
+        <div class="art-line"></div>
+        <p>Small steps,<br><em>big progress.</em></p>
+      </div>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Your tasks stay on this device</div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL WORKSPACE</p>
+          <h1>Let’s get things <span class="title-highlight">done.</span></h1>
+          <p class="subtitle">A little progress each day adds up to something great.</p>
+        </div>
+        <div class="date-pill"><span class="date-icon">☼</span><span id="todayDate"></span></div>
+      </header>
+
+      <section class="stats-grid" aria-label="Task statistics">
+        <article class="stat-card"><div class="stat-icon blue-icon">▤</div><div><span class="stat-number" id="totalCount">0</span><span class="stat-label">Total tasks</span></div></article>
+        <article class="stat-card"><div class="stat-icon green-icon">✓</div><div><span class="stat-number" id="completedCount">0</span><span class="stat-label">Completed</span></div></article>
+        <article class="stat-card"><div class="stat-icon gold-icon">◷</div><div><span class="stat-number" id="activeCount">0</span><span class="stat-label">In progress</span></div></article>
+        <article class="stat-card"><div class="stat-icon pale-icon">○</div><div><span class="stat-number" id="pendingCount">0</span><span class="stat-label">Still to do</span></div></article>
+      </section>
+
+      <div class="content-grid">
+        <section class="task-panel">
+          <form class="add-task" id="taskForm">
+            <div class="add-symbol">+</div>
+            <label class="sr-only" for="taskInput">New task</label>
+            <input id="taskInput" type="text" placeholder="What needs to get done?" maxlength="160" autocomplete="off" required>
+            <select id="priorityInput" aria-label="Task priority">
+              <option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option>
+            </select>
+            <button class="add-button" type="submit">Add task <span>↗</span></button>
+          </form>
+
+          <div class="task-toolbar">
+            <div class="filter-tabs" role="group" aria-label="Filter tasks">
+              <button class="filter-tab active" data-filter="all">All tasks</button>
+              <button class="filter-tab" data-filter="active">In progress</button>
+              <button class="filter-tab" data-filter="completed">Completed</button>
+            </div>
+            <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search tasks..." aria-label="Search tasks"></label>
+          </div>
+
+          <div class="task-list" id="taskList" aria-live="polite"></div>
+          <div class="list-footer">
+            <span id="listSummary">Ready when you are.</span>
+            <button id="clearCompleted" class="text-button">Clear completed</button>
+          </div>
+        </section>
+
+        <aside class="right-column">
+          <section class="progress-card">
+            <div class="progress-ring" id="progressRing"><div><strong id="progressPercent">0%</strong><small>complete</small></div></div>
+            <div class="progress-copy"><span class="card-kicker">YOUR PROGRESS</span><h2>Keep it up!</h2><p id="progressText">Your next win is one task away.</p></div>
+            <div class="progress-track"><span id="progressBar"></span></div>
+          </section>
+          <section class="focus-card">
+            <div class="focus-top"><span class="focus-star">✦</span><span class="card-kicker">A LITTLE REMINDER</span></div>
+            <h2>One thing<br>at a time.</h2>
+            <p>You don’t have to do it all at once. Just start with the next small step.</p>
+            <div class="gold-rule"></div>
+            <div class="focus-decoration" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+          </section>
+          <section class="storage-note"><span class="storage-icon">▣</span><div><strong>Saved automatically</strong><p>Your tasks are stored in this browser.</p></div><span class="saved-check">✓</span></section>
+          <button class="clear-all-button" id="clearAll">Delete all tasks <span>⌫</span></button>
+        </aside>
+      </div>
+      <footer><span>✦ <strong>TaskFlow</strong></span><span>Plan with purpose. Progress with confidence.</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
